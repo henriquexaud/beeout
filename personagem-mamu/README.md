@@ -42,3 +42,4 @@ personagem-mamu/
 |---|---|
 | 2026-10-09 | **v2 do visual:** mesma arte, formato e estilo da v1, com olheiras e mau humor mais explícito (pálpebra mais baixa, sobrancelhas anguladas, boca para baixo). Detalhes em [visual.md](conceito/visual.md). |
 | 2026-10-09 | A barriga fica como na arte original. |
+| 2026-10-09 | Primeiro motion: [M06 caminhada resmungando](motion/M06-caminhada-resmungando/), em SVG animado a partir da pose 5. |

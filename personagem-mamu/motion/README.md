@@ -14,7 +14,7 @@ Aqui ficam as ideias e as animações do Mamu. Cada motion tem uma pasta própri
 | [M03](M03-comida-de-verdade/) | Comida de verdade | Registro de delivery | Ideia |
 | [M04](M04-se-mexer/) | Você precisa se mexer | Dia sem movimento | Ideia |
 | [M05](M05-vai-dormir/) | Vai dormir | Uso de madrugada | Ideia |
-| [M06](M06-caminhada-resmungando/) | Caminhada resmungando | Atividade concluída | Ideia |
+| [M06](M06-caminhada-resmungando/) | Caminhada resmungando | Atividade concluída | Protótipo ([HTML](M06-caminhada-resmungando/mamu-caminhando.html)) |
 | [M07](M07-voce-voltou/) | Você voltou | Retorno depois de sumir ou recair | Ideia |
 | [M08](M08-orgulho-disfarcado/) | Orgulho disfarçado | Marco de sequência | Ideia |
 | [M09](M09-dessa-parte-eu-nao-entendo/) | Dessa parte eu não entendo | Tema sensível | Ideia |
