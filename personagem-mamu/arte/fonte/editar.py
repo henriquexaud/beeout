@@ -1,5 +1,5 @@
 """
-Mamu v2 = arte original (v1) + barriga mais saliente, olheiras e mau humor mais explícito.
+Mamu v2 = arte original (v1) + olheiras e mau humor mais explícito.
 
 Edita a própria imagem da v1, pintando por cima só o necessário, para manter
 formato, traço e cores idênticos. Também limpa os pontinhos soltos do recorte.
@@ -7,8 +7,8 @@ formato, traço e cores idênticos. Também limpa os pontinhos soltos do recorte
     pip install pillow numpy opencv-python-headless
     python3 editar.py            # referencia/mamu-v1-original.png -> mamu-v2.png
 
-As coordenadas de cada pose estão em main(); os parâmetros de pálpebra,
-olheira e barriga ficam em eye() e belly().
+As coordenadas de cada pose estão em main(); os parâmetros de pálpebra
+e olheira ficam em eye().
 """
 import math
 import os
@@ -21,7 +21,6 @@ from PIL import Image, ImageDraw
 SS = 4  # supersampling para bordas suaves
 
 BODY = (198, 83, 30)
-SHADE = (172, 66, 22)
 BROWN = (104, 40, 16)
 LINE = (112, 40, 16)
 LID_LINE = (60, 24, 12)
@@ -76,23 +75,6 @@ class Canvas:
         p = self.a[y0:y0 + h, x0:x0 + w]
         c = np.array(color, np.float32)
         p[..., :3] = p[..., :3] * (1 - m[..., None]) + c * m[..., None]
-
-    def behind(self, mk, color):
-        """Pinta atrás da arte existente (só aparece onde era transparente)."""
-        x0, y0, m = mk
-        h, w = m.shape
-        p = self.a[y0:y0 + h, x0:x0 + w]
-        # borda antiga semitransparente (com franja clara do recorte original) que agora
-        # fica sobre o corpo: vira cor do corpo, exceto se for borda marrom/creme
-        edge = (m > 0.05) & (p[..., 3] < 250) & (p[..., 3] > 0) & (p[..., 0] >= 145) & ~((p[..., 1] > 150) & (p[..., 3] > 128))
-        p[..., :3] = np.where(edge[..., None], np.array(color, np.float32), p[..., :3])
-        ao = p[..., 3:4] / 255.0
-        al = m[..., None]
-        out_a = ao + al * (1 - ao)
-        c = np.array(color, np.float32)
-        rgb = (p[..., :3] * ao + c * al * (1 - ao)) / np.maximum(out_a, 1e-6)
-        p[..., :3] = np.where(out_a > 0, rgb, p[..., :3])
-        p[..., 3:4] = out_a * 255
 
     def save(self, path):
         Image.fromarray(np.clip(self.a, 0, 255).round().astype(np.uint8), 'RGBA').save(path)
@@ -221,45 +203,6 @@ def brow(cv, outer, inner, ws=(4, 9, 10)):
     stroke(cv, [outer, ((outer[0] + inner[0]) / 2, (outer[1] + inner[1]) / 2 - 2), inner], list(ws), BROWN)
 
 
-def belly(cv, cx, cy, rx, ry, shade=10, navel=True, legs_shade=True):
-    box = (cx - rx - 24, cy - ry - 24, cx + rx + 24, cy + ry + shade + 24)
-    ellipse = lambda grow=0: (lambda d, T: d.ellipse(T([(cx - rx - grow, cy - ry - grow), (cx + rx + grow, cy + ry + grow)]), fill=255))
-
-    # apaga a dobra antiga que ficaria dentro da barriga nova
-    x0, y0, m = cv.mask(box, lambda d, T: d.ellipse(T([(cx - rx + 14, cy - ry * 0.2), (cx + rx - 14, cy + ry - 6)]), fill=255))
-    cl = cv.classes(x0, y0, m)
-    p = cv.a[y0:y0 + m.shape[0], x0:x0 + m.shape[1]]
-    mm = m * (cl['orange'] & (p[..., 0] < 192) & (p[..., 0] > 140))
-    p[..., :3] = p[..., :3] * (1 - mm[..., None]) + np.array(BODY, np.float32) * mm[..., None]
-
-    # silhueta: a barriga entra por trás de tudo (braços, tromba e rabo continuam na frente)
-    cv.behind(cv.mask(box, ellipse()), BODY)
-
-    # suaviza os "degraus" onde a barriga encontra o contorno do corpo
-    x0, y0, lim = cv.mask(box, ellipse(12))
-    h, w = lim.shape
-    p = cv.a[y0:y0 + h, x0:x0 + w]
-    solid = (p[..., 3] > 128).astype(np.uint8)
-    closed = cv2.morphologyEx(solid, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (17, 17)))
-    r, g, b = p[..., 0], p[..., 1], p[..., 2]
-    near_brown = cv2.dilate(((r < 145) & (g < 75) & (b < 55) & (p[..., 3] > 128)).astype(np.uint8), np.ones((9, 9), np.uint8))
-    rows = (np.arange(h)[:, None] + y0) < cy + ry * 0.3
-    add = (closed > 0) & (solid == 0) & (lim > 0.5) & (near_brown == 0) & rows
-    add = cv2.GaussianBlur(add.astype(np.float32), (0, 0), 0.8)
-    cv.behind((x0, y0, add), BODY)
-
-    if legs_shade:
-        # sombra da barriga caindo nas pernas (só abaixo da barriga)
-        def crescent(d, T):
-            d.ellipse(T([(cx - rx + 6, cy - ry + shade), (cx + rx - 6, cy + ry + shade)]), fill=255)
-            d.ellipse(T([(cx - rx, cy - ry), (cx + rx, cy + ry)]), fill=0)
-            d.rectangle(T([(cx - rx - 20, cy - ry - 20), (cx + rx + 20, cy + ry * 0.35)]), fill=0)
-        cv.paint(cv.mask(box, crescent), SHADE, 1.0, ('orange',))
-    if navel:
-        nx, ny = navel if isinstance(navel, tuple) else (cx, cy + ry * 0.55)
-        stroke(cv, [(nx - 6, ny - 1), (nx, ny + 3), (nx + 6, ny - 1)], [2.5, 3.5, 2.5], SHADE, 1.0, ('orange',))
-
-
 def clean_speckles(cv):
     al = (cv.a[..., 3] > 20).astype(np.uint8)
     keep = cv2.dilate(al, np.ones((7, 7), np.uint8))
@@ -286,7 +229,6 @@ def main(src, dst):
     brow(cv, (158, lo[1] - 16), (207, li[1] - 9))
     brow(cv, (276, ro[1] - 16), (229, ri[1] - 9))
     stroke(cv, [(253, 219), (262, 214), (273, 222)], [2.5, 4, 2.5], LINE)
-    belly(cv, 217, 402, 124, 56)
 
     # 2. três quartos -----------------------------------------------------
     erase(cv, [(560, 120), (614, 120), (614, 151), (560, 151)])
@@ -295,7 +237,6 @@ def main(src, dst):
     (ro, ri) = eye(cv, (636, 169, 673, 196), 'l')
     brow(cv, (560, lo[1] - 18), (609, li[1] - 9))
     brow(cv, (680, ro[1] - 15), (636, ri[1] - 8), (4, 8, 9))
-    belly(cv, 602, 402, 116, 56, navel=(622, 432))
 
     # 3. perfil -------------------------------------------------------------
     erase(cv, [(988, 114), (1042, 114), (1042, 144), (988, 144)])
@@ -303,10 +244,8 @@ def main(src, dst):
     (eo, ei) = eye(cv, (1003, 151, 1039, 182), 'r')
     brow(cv, (999, eo[1] - 18), (1040, ei[1] - 9))
     stroke(cv, [(1031, 214), (1039, 208), (1049, 212)], [2.5, 4, 2.5], LINE)
-    belly(cv, 1000, 372, 82, 75, navel=(1046, 402))
 
-    # 4. costas: só a barriga aparecendo dos lados -------------------------
-    belly(cv, 1350, 410, 116, 54, navel=False, legs_shade=False)
+    # 4. costas: sem rosto, fica como na v1
 
     # 5. andando -------------------------------------------------------------
     erase(cv, [(182, 594), (238, 594), (238, 622), (182, 622)])
@@ -317,7 +256,6 @@ def main(src, dst):
     brow(cv, (190, lo[1] - 18), (234, li[1] - 9))
     brow(cv, (296, ro[1] - 14), (262, ri[1] - 8), (4, 8, 9))
     stroke(cv, [(196, 690), (204, 684), (213, 689)], [2.5, 4, 2.5], LINE)
-    belly(cv, 230, 842, 104, 58, navel=(246, 874))
 
     # 6. acenando -----------------------------------------------------------
     erase(cv, [(552, 586), (598, 586), (598, 614), (552, 614)])
@@ -328,7 +266,6 @@ def main(src, dst):
     brow(cv, (556, lo[1] - 17), (604, li[1] - 9))
     brow(cv, (662, ro[1] - 13), (630, ri[1] - 8), (4, 8, 9))
     stroke(cv, [(566, 672), (582, 664), (598, 671)], [2.5, 4, 2.5], LINE)
-    belly(cv, 605, 848, 130, 56)
 
     # 7. dando de ombros ----------------------------------------------------
     erase(cv, [(916, 606), (978, 606), (978, 638), (916, 638)])
@@ -339,7 +276,6 @@ def main(src, dst):
     brow(cv, (926, lo[1] - 17), (976, li[1] - 9))
     brow(cv, (1042, ro[1] - 14), (1003, ri[1] - 8), (4, 8, 9))
     stroke(cv, [(935, 696), (946, 689), (957, 695)], [2.5, 4, 2.5], LINE)
-    belly(cv, 968, 862, 128, 54)
 
     # 8. facepalm -----------------------------------------------------------
     erase(cv, [(1312, 620), (1366, 620), (1366, 644), (1312, 644)])
@@ -348,7 +284,6 @@ def main(src, dst):
     cv.paint(cv.mask(bbox_of(bag), lambda d, T: d.polygon(T(bag), fill=255)), OLHEIRA, 0.9, ('orange',))
     stroke(cv, [(1316, 668), (1337, 670), (1359, 665)], [3, 5, 3], LID_LINE)
     brow(cv, (1316, 637), (1362, 650))
-    belly(cv, 1340, 860, 124, 54)
 
     cv.save(dst)
 
