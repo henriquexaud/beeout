@@ -6,7 +6,7 @@
 | **Gatilho no app** | Registro de delivery / fast food |
 | **Duração** | ~4 s |
 | **Loop** | não |
-| **Poses e expressões** | "Comida de verdade" |
+| **Poses** | 1 (frente) + sacola de delivery (a desenhar), da [folha v2](../../arte/mamu-v2.png) |
 
 ## Ideia em uma frase
 

@@ -30,7 +30,7 @@ O BeeOut incentiva hábitos saudáveis (movimento, menos tela) e converte isso e
 
 - **O Mamu melhora junto com o usuário?** Por exemplo: a olheira diminui conforme sua sequência cresce, e um dia ele aparece sem cigarro. É forte como recompensa, mas não pode virar responsabilidade do usuário ("se você falhar, o Mamu piora").
 - **O hábito do Mamu espelha o do usuário?** Se você quer parar de fumar, o vício dele em destaque é o cigarro; se é tela, ele vive no celular.
-- **Relação com o BeeOut:** mascote de um "modo largar" dentro do app, ou projeto separado com a mesma família visual (o amarelo BeeOut já aparece nos acessórios dele)?
+- **Relação com o BeeOut:** mascote de um "modo largar" dentro do app, ou projeto separado com a mesma família visual?
 - **Notificações:** qual tom e horário funcionam sem soar como cobrança?
 - **Palavrão:** só dentro do app (opt-in)? Nunca em push?
 

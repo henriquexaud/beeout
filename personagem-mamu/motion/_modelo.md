@@ -7,7 +7,7 @@
 | **Duração** | ~4 s |
 | **Loop** | sim / não |
 | **Formato** | Lottie / Rive / MP4 / GIF |
-| **Poses e expressões** | Links para `arte/` |
+| **Poses** | Números da [folha v2](../arte/mamu-v2.png) ou "a desenhar" |
 
 ## Ideia em uma frase
 

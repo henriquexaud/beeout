@@ -6,7 +6,7 @@
 | **Gatilho no app** | Dia sem passos/atividade |
 | **Duração** | ~5 s |
 | **Loop** | não |
-| **Poses e expressões** | "Você precisa se mexer" |
+| **Poses** | 1 (frente) + tromba esticada e controle (a desenhar), da [folha v2](../../arte/mamu-v2.png) |
 
 ## Ideia em uma frase
 

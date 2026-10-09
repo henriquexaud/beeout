@@ -6,7 +6,7 @@
 | **Gatilho no app** | Uso depois da meia-noite |
 | **Duração** | ~5 s |
 | **Loop** | não |
-| **Poses e expressões** | "Madrugada (olho vermelho)", "Sei…" |
+| **Poses** | 1 (frente) com olho vermelho (a desenhar), 8 (mão na cara), da [folha v2](../../arte/mamu-v2.png) |
 
 ## Ideia em uma frase
 

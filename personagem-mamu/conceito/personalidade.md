@@ -1,6 +1,6 @@
 # Mamu: personalidade
 
-![Mamu v2](../arte/mamu-v2-poses.png)
+![Mamu v2](../arte/mamu-v2.png)
 
 ## Premissa
 

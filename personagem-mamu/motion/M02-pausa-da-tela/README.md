@@ -6,7 +6,7 @@
 | **Gatilho no app** | Tempo de tela acima da meta |
 | **Duração** | ~5 s |
 | **Loop** | não |
-| **Poses e expressões** | "Faz uma pausa da tela", "Pego no flagra" |
+| **Poses** | 1 (frente) + celular (a desenhar), da [folha v2](../../arte/mamu-v2.png) |
 
 ## Ideia em uma frase
 

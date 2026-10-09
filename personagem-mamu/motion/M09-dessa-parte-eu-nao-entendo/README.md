@@ -6,7 +6,7 @@
 | **Gatilho no app** | Sinais de que o assunto vai além de um mau hábito (dependência severa, crise) |
 | **Duração** | ~4 s |
 | **Loop** | não |
-| **Poses e expressões** | "Dessa parte eu não entendo" (sem o "?" cômico) |
+| **Poses** | 1 (frente), com sobrancelhas neutras, da [folha v2](../../arte/mamu-v2.png) |
 
 ## Ideia em uma frase
 

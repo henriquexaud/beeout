@@ -8,7 +8,7 @@ Aqui ficam as ideias e as animações do Mamu. Cada motion tem uma pasta própri
 
 | # | Motion | Gatilho no app | Status |
 |---|---|---|---|
-| [M00](M00-idle/) | Idle: "Só hoje" | App aberto, Mamu parado | Protótipo (SVG animado) |
+| [M00](M00-idle/) | Idle | App aberto, Mamu parado | Ideia |
 | [M01](M01-segunda-eu-comeco/) | Segunda eu começo | Usuário adia a meta | Ideia |
 | [M02](M02-pausa-da-tela/) | Faz uma pausa da tela | Tempo de tela alto | Ideia |
 | [M03](M03-comida-de-verdade/) | Comida de verdade | Registro de delivery | Ideia |
@@ -36,7 +36,7 @@ Princípios tirados da [personalidade](../conceito/personalidade.md). Valem para
 
 ## Base técnica (sugestão)
 
-- **Arte base:** [`arte/mamu-v2-frente.svg`](../arte/mamu-v2-frente.svg), com as camadas já nomeadas (`pernas`, `orelhas`, `corpo`, `cabelo`, `olhos`, `sobrancelhas`, `presas`, `boca`, `tromba`, `bracos`). Poses e expressões novas podem ser geradas em [`arte/fonte/`](../arte/fonte/).
+- **Arte base:** [`arte/mamu-v2.png`](../arte/mamu-v2.png), com as 8 poses. Para animar, o personagem precisa ser separado em camadas (corpo, cabeça, orelhas, olhos, pálpebras, sobrancelhas, tromba, braços, pernas, rabo) na ferramenta de motion, usando a folha como referência.
 - **Formatos:** Lottie ou Rive para o app (leve, vetorial, interativo); MP4 ou GIF para redes e apresentações.
 - **Quadro:** 400×480 (5:6) para o app; 1080×1350 para feed.
 - **Ritmo:** 24 fps dá a sensação de cartoon. A maioria dos motions de reação deve ficar entre 3 e 6 segundos.

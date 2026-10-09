@@ -6,7 +6,7 @@
 | **Gatilho no app** | Usuário adia a meta ou marca "começo segunda" |
 | **Duração** | ~5 s |
 | **Loop** | não |
-| **Poses e expressões** | "Segunda eu começo" (shrug), "Side-eye sarcástico" |
+| **Poses** | 7 (dando de ombros), 2 (3/4) para o side-eye, da [folha v2](../../arte/mamu-v2.png) |
 
 ## Ideia em uma frase
 

@@ -1,34 +1,29 @@
-# M00: Idle "Só hoje"
-
-![idle](mamu-idle.svg)
+# M00: Idle
 
 | | |
 |---|---|
-| **Status** | Protótipo: [`mamu-idle.svg`](mamu-idle.svg) (abra no navegador) |
+| **Status** | Ideia |
 | **Gatilho no app** | Mamu parado na tela (home, check-in) |
-| **Duração** | Loop: respiração de 3,6 s, piscada a cada 5,2 s, fumaça a cada 1,6 s |
+| **Duração** | Loop de ~4 s |
 | **Loop** | sim |
-| **Formato** | SVG + CSS (protótipo) → Lottie/Rive no app |
-| **Pose** | "Só hoje" ([poses](../../arte/mamu-v2-poses.png)) |
+| **Formato** | Lottie / Rive |
+| **Poses** | 1 (frente), da [folha v2](../../arte/mamu-v2.png) |
 
 ## Ideia em uma frase
 
-O estado normal do Mamu: largado, de olho meio fechado, com um cigarro "só hoje" na mão.
+O estado normal do Mamu: largado, de olho meio fechado e de mau humor, só respirando.
 
-## O que já está no protótipo
+## Roteiro
 
-| Camada | Animação |
-|---|---|
-| Corpo inteiro | Respiração lenta: escala 1 → 1,024 na vertical, ancorada nos pés |
-| Olhos | Piscada pesada, às vezes dupla |
-| Fumaça | Duas plumas alternadas que sobem e somem |
-| Brasa | Pulsa entre laranja e amarelo |
+| Tempo | O que acontece | Fala / legenda |
+|---|---|---|
+| loop | Respiração lenta; a barriga sobe e desce mais que o resto do corpo | |
+| ~3 s | Piscada pesada, às vezes dupla | |
+| variação | De vez em quando, um side-eye para a câmera e volta | |
 
-Com `prefers-reduced-motion` ativado, tudo fica parado.
+## Notas de animação
 
-## Próximos passos
-
-- [ ] Versão **sem cigarro** (idle neutro) para telas de conquista do usuário
-- [ ] Variação: de vez em quando ele dá um side-eye para a câmera
-- [ ] Ação secundária: a ponta da tromba mexe devagar
-- [ ] Barriga com follow-through próprio, separada da respiração do corpo
+- A respiração é ancorada nos pés; a barriga tem um leve atraso (follow-through).
+- A piscada é lenta, porque a pálpebra já é pesada.
+- A ponta da tromba se mexe devagar como ação secundária.
+- Variação com cigarro "só hoje" (fumaça cinza, sem glamour) só fora das telas de conquista do usuário.

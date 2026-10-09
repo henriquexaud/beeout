@@ -6,7 +6,7 @@
 | **Gatilho no app** | Marco de sequência (3, 7, 30 dias) |
 | **Duração** | ~4 s |
 | **Loop** | não |
-| **Poses e expressões** | "Orgulho disfarçado" |
+| **Poses** | 6 (acenando) como base; rosto corado (a desenhar), da [folha v2](../../arte/mamu-v2.png) |
 
 ## Ideia em uma frase
 

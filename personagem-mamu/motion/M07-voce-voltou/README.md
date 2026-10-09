@@ -6,7 +6,7 @@
 | **Gatilho no app** | Usuário volta depois de dias sem registrar ou depois de uma recaída |
 | **Duração** | ~5 s |
 | **Loop** | não |
-| **Poses e expressões** | Costas (turnaround), "Orgulho disfarçado" |
+| **Poses** | 4 (costas) → 2 (3/4) → 1 (frente), da [folha v2](../../arte/mamu-v2.png) |
 
 ## Ideia em uma frase
 
